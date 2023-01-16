@@ -1,0 +1,118 @@
+<div class="page-header">
+  <div class="container">
+    <h1>{{header}}</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row top-row">
+    <div class="col-xs-12 row end-xs">
+      <a routerLink="/students" color="primary" mat-raised-button>
+        <mat-icon>chevron_left</mat-icon>
+        Go Back
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <!-- Student Details -->
+      <form #LivreDetailsForm="ngForm">
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Titre</mat-label>
+              <input type="text" matInput [(ngModel)]="livre.Titre" name="Titre" required>
+              <mat-error>titre is a required field</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Auteur</mat-label>
+              <input type="text" matInput [(ngModel)]="livre.Auteurs" name="auteurs" required>
+              <mat-error>auteurs is a required field</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Année de création</mat-label>
+              <input type="text" matInput [(ngModel)]="livre.AnneEdition" name="AnneEdition" required>
+              <mat-error>Date Of Birth is a required field</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre de page</mat-label>
+              <input type="text" matInput [(ngModel)]="livre.Nbpage" name="Nbpage" required>
+              <mat-error>Nb page is a required field</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Maison Edition </mat-label>
+              <input type="number" matInput [(ngModel)]="livre.maisonEdition" name="maisonEdition"required>
+              <mat-error>maison d'edition is a required field</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Auteurs</mat-label>
+              <mat-select [(ngModel)]="livre.Auteurs" name="Auteur" required>
+                <mat-option *ngFor="let auteur of AuteurList" [value]="auteur.idAuteurs">
+                  {{ auteur.nom}}
+                </mat-option>
+              </mat-select>
+              <mat-error>Gender is a required field</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Type de livre</mat-label>
+              <mat-select [(ngModel)]="livre.TypeLivre" name="TypeLivre" required>
+                <mat-option *ngFor="let type of TypeLivreList" [value]="type.idTypeLivre">
+                  {{ type.type}}
+                </mat-option>
+              </mat-select>
+              <mat-error>Gender is a required field</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row between-xs" *ngIf="!isNewLivre">
+              <button mat-raised-button color="primary" >Save</button>
+              <button mat-raised-button color="warn">Delete</button>
+            </div>
+            <div class="row between-xs" *ngIf="isNewLivre">
+              <button mat-raised-button color="primary" >Add</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-xs-6">
+      <div class="row center-xs">
+        <div class="image-container">
+          <img [src]="displayProfileImageUrl" alt="Profile Image">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 row center-xs mt-1" *ngIf="!isNewLivre">
+          <input hidden type="file" #imageUpload >
+          <button mat-raised-button color="primary" (click)="imageUpload.click()">Change Image</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
