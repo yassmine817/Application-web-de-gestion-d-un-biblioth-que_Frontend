@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="container">
-    <h1>{{header}}</h1>
+    <h1>Ajouter un nouveau Livre</h1>
   </div>
 </div>
 
@@ -17,7 +17,7 @@
   <div class="row">
     <div class="col-xs-6">
       <!-- Student Details -->
-      <form #LivreDetailsForm="ngForm">
+      <form #LivreAddForm="ngForm">
         <div class="row">
           <div class="col-xs-6">
             <mat-form-field appearance="outline">
@@ -28,9 +28,9 @@
           </div>
           <div class="col-xs-6">
             <mat-form-field appearance="outline">
-              <mat-label>Auteur</mat-label>
-              <input type="text" matInput [(ngModel)]="livre.Auteurs" name="auteurs" required>
-              <mat-error>auteurs is a required field</mat-error>
+              <mat-label>Maison d'édition</mat-label>
+              <input type="text" matInput [(ngModel)]="livre.maisonEdition" name="maisonEdition" required>
+              <mat-error>Maison d'édition is a required field</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -39,36 +39,36 @@
             <mat-form-field appearance="outline">
               <mat-label>Année de création</mat-label>
               <input type="text" matInput [(ngModel)]="livre.AnneEdition" name="AnneEdition" required>
-              <mat-error>Date Of Birth is a required field</mat-error>
+              <mat-error>Année d'édition est vide </mat-error>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-6">
             <mat-form-field appearance="outline">
-              <mat-label>Nombre de page</mat-label>
-              <input type="text" matInput [(ngModel)]="livre.Nbpage" name="Nbpage" required>
-              <mat-error>Nb page is a required field</mat-error>
+              <mat-label>Nombre de page </mat-label>
+              <input type="number" matInput [(ngModel)]="livre.Nbpage" name="Nbpage"required>
+              <mat-error>Nombre de page est vide</mat-error>
             </mat-form-field>
           </div>
-          <div class="col-xs-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Maison Edition </mat-label>
-              <input type="number" matInput [(ngModel)]="livre.maisonEdition" name="maisonEdition"required>
-              <mat-error>maison d'edition is a required field</mat-error>
-            </mat-form-field>
-          </div>
+            <div class="col-xs-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Langue</mat-label>
+                <input type="text" matInput [(ngModel)]="livre.Langue" name="Langue" required>
+                <mat-error>Langue  est vide </mat-error>
+              </mat-form-field>
+            </div>
         </div>
         <div class="row">
           <div class="col-xs-12">
             <mat-form-field appearance="outline">
               <mat-label>Auteurs</mat-label>
-              <mat-select [(ngModel)]="livre.Auteurs" name="Auteurs" required>
+              <mat-select [(ngModel)]="livre.idAuteurs" name="auteur" required>
                 <mat-option *ngFor="let auteur of AuteurList" [value]="auteur.idAuteurs">
                   {{ auteur.nom}}
                 </mat-option>
               </mat-select>
-              <mat-error>Gender is a required field</mat-error>
+              <mat-error>Auteurs is a required field</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -82,7 +82,7 @@
                   {{ type.type}}
                 </mat-option>
               </mat-select>
-              <mat-error>type livre is a required field</mat-error>
+              <mat-error>Gender is a required field</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -91,11 +91,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="row between-xs">
-              <button mat-raised-button color="primary" >Save</button>
-              <button mat-raised-button color="warn">Delete</button>
-            </div>
-            <div class="row between-xs" *ngIf="isNewLivre">
-              <button mat-raised-button color="primary" >Add</button>
+              <button mat-raised-button color="primary" type="submit" >Ajouter</button>
             </div>
           </div>
         </div>
@@ -110,7 +106,7 @@
       <div class="row">
         <div class="col-xs-12 row center-xs mt-1" *ngIf="!isNewLivre">
           <input hidden type="file" #imageUpload >
-          <button mat-raised-button color="primary" (click)="imageUpload.click()">Change Image</button>
+          <button mat-raised-button color="primary" (click)="imageUpload.click()">Insert Image</button>
         </div>
       </div>
     </div>

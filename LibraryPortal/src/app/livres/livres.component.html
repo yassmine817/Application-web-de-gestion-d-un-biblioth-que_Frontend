@@ -9,7 +9,7 @@
     <div class="col-xs-12">
       <input type="text" class="searh-input" placeholder="Rechercher Livre" [(ngModel)]="filterString"
        (keyup)="filterLivre()">
-      <a routerLink="/livre/add" mat-raised-button color="primary" class="ml-1">Ajouter nouvelle livre</a>
+      <a routerLink="/add/livre" mat-raised-button color="primary" class="ml-1">Ajouter nouvelle livre</a>
     </div>
   </div>
 
@@ -53,14 +53,14 @@
       <!-- Gender Column -->
       <ng-container matColumnDef="TypeLivre">
         <th mat-header-cell *matHeaderCellDef> TypeLivre </th>
-        <td mat-cell *matCellDef="let element"> {{element.TypeLivre.nom}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.TypeLivre}} </td>
       </ng-container>
 
       <!-- Edit Column -->
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element">
-          <a [routerLink]="['/livres', element.id]">
+          <a [routerLink]="['/livresDetail', element.id]">
             <mat-icon color="primary">edit</mat-icon>
           </a>
         </td>

@@ -11,30 +11,29 @@ import { Livre } from 'src/app/Models/Livre';
 @Component({
   selector: 'app-view-livre',
   templateUrl: './view-livre.component.html',
-  styleUrls: ['./view-livre.component.css']
+  styleUrls: ['./view-livre.component.css'],
 })
 export class ViewLivreComponent implements OnInit {
-
   livreId: string | null | undefined;
   livre: Livre = {
-    CodeLivre:'',
-    Titre:'',
-    Langue:'',
-    maisonEdition:'',
-    imageLivreURL:'',
-    Nbpage:0,
-    prixAchat:0,
+    id: '',
+    Titre: '',
+    Langue: '',
+    maisonEdition: '',
+    imageLivreURL: '',
+    Nbpage: 0,
+    prixAchat: 0,
     AnneEdition: 0,
     idTypeLivre: '',
-
+    idAuteurs:'',
     Auteurs: {
       idAuteurs: '',
-      nom: ''
+      nom: '',
     },
     TypeLivre: {
       idTypeLivre: '',
-      type:'',
-    }
+      type: '',
+    },
   };
 
   isNewLivre = false;
@@ -42,52 +41,64 @@ export class ViewLivreComponent implements OnInit {
   displayProfileImageUrl = '';
 
   AuteurList: Auteurs[] = [];
-   TypeLivreList: TypeLivre[] = [];
+  TypeLivreList: TypeLivre[] = [];
 
   @ViewChild('LivreDetailsForm') LivreDetailsForm?: NgForm;
 
-  constructor(private readonly livreService: LivreService,
+  constructor(
+    private readonly livreService: LivreService,
     private readonly route: ActivatedRoute,
     private readonly auteurService: AuteursService,
     private snackbar: MatSnackBar,
-    private router: Router) { }
-
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
-      (params) => {
-        this.livreId = params.get('id');
-
-        if (this.livreId) {
-          if (this.livreId.toLowerCase() === 'Add'.toLowerCase()) {
-            // -> new livre Functionality
-            this.isNewLivre = true;
-            this.header = 'Add New Livre';
-            //this.setImage();
-          } else {
-            // -> Existing livre Functionality
-            this.isNewLivre = false;
-            this.header = 'Edit Livre';
-            this.livreService.getLivre(this.livreId)
-              .subscribe(
-                (successResponse) => {
-                  this.livre = successResponse;
-                 // this.setImage();
-                },
-                (errorResponse) => {
-                  //this.setImage();
-                }
-              );
-          }
-        }
+    this.route.paramMap.subscribe((params) => {
+      this.livreId = params.get('id');
+      if (this.livreId) {
+        this.livreService
+          .getLivre(this.livreId)
+          .subscribe((successResponse) => (this.livre = successResponse));
       }
-    );
+      this.auteurService.getAuteursList().subscribe((successResponse) => {
+        this.AuteurList = successResponse;
+      });
+    });
   }
 
+  onUpdate(): void {
+    if (this.LivreDetailsForm?.form.valid) {
+      this.livreService.updateLivre(this.livre.id, this.livre)
+        .subscribe(
+          (successResponse) => {
+            // Show a notification
+            this.snackbar.open('book updated successfully', undefined, {
+              duration: 2000
+            });
+          },
+          (errorResponse) => {
+            // Log it
+            console.log(errorResponse);
+          }
+        );
+    }
+  }
+  onDelete(): void {
+    this.livreService.deleteLivre(this.livre.id)
+      .subscribe(
+        (successResponse) => {
+          this.snackbar.open('livre deleted successfully', undefined, {
+            duration: 2000
+          });
 
-
-
+          setTimeout(() => {
+            this.router.navigateByUrl('livres');
+          }, 2000);
+        },
+        (errorResponse) => {
+          // Log
+        }
+      );
+  }
 }
-
-
-

@@ -1,3 +1,4 @@
+import { AddLivreReuest } from './../Models/AddLivreRequest';
 import { Auteurs } from './../Models/Auteurs';
 import { UpdateLivreRequest } from './../Models/UpdateLivreRequest';
 import { Injectable } from '@angular/core';
@@ -25,17 +26,36 @@ export class LivreService {
     const updatelivreRequest: UpdateLivreRequest= {
       Titre: livreRequest.Titre,
       AnneEdition: livreRequest.AnneEdition,
-      //Auteurs: livreRequest.Auteurs?.idAuteurs,
       Langue: livreRequest.Langue,
       Nbpage: livreRequest.Nbpage,
       idTypeLivre: livreRequest.TypeLivre?.idTypeLivre,
+      idAuteurs: livreRequest.idAuteurs,
       imageLivreURL: livreRequest.imageLivreURL,
       maisonEdition: livreRequest.maisonEdition
     }
 
-    return this.httpClient.put<Livre>(this.baseApiUrl + '/livres/' + livreId, updatelivreRequest);
+    return this.httpClient.put<Livre>(this.baseApiUrl + '/livre/' + livreId, updatelivreRequest);
   }
 
+
+  addLivre(LivreRequest: Livre): Observable<Livre> {
+    const addLivreRequest: AddLivreReuest = {
+      Titre: LivreRequest.Titre,
+      Nbpage: LivreRequest.Nbpage,
+      maisonEdition: LivreRequest.maisonEdition,
+      prixAchat: LivreRequest.prixAchat,
+      idTypeLivre: LivreRequest.idTypeLivre,
+      Langue:LivreRequest.Langue
+      //nom: LivreRequest.Auteurs?.nom,
+    };
+
+    return this.httpClient.post<Livre>(this.baseApiUrl + '/add/livre', addLivreRequest);
+  }
+
+
+  deleteLivre(livreId: string): Observable<Livre> {
+    return this.httpClient.delete<Livre>(this.baseApiUrl + '/livres/' + livreId);
+  }
 
 
 }

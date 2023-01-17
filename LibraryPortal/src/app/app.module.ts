@@ -49,13 +49,21 @@ import { TopNavComponent } from './layouts/top-nav/top-nav.component';
 import { LivresComponent } from './livres/livres.component';
 import { FormsModule } from '@angular/forms';
 import { ViewLivreComponent } from './livres/view-livre/view-livre.component';
+import { AddLivreComponent } from './livres/add-livre/add-livre.component';
+import { SideBarComponent } from './layouts/side-bar/side-bar.component';
+import { AuteursComponent } from './auteurs/auteurs.component';
+import { AddAuteursComponent } from './auteurs/add-auteurs/add-auteurs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
     LivresComponent,
-    ViewLivreComponent
+    ViewLivreComponent,
+    AddLivreComponent,
+    SideBarComponent,
+    AuteursComponent,
+    AddAuteursComponent
   ],
   imports: [
     FormsModule,

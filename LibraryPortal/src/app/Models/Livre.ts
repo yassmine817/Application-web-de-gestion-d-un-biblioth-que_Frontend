@@ -1,7 +1,7 @@
 import { Auteurs } from "./Auteurs";
 import { TypeLivre } from "./TypeLivre";
 export class Livre {
-  CodeLivre?: string;
+  id!: string;
   Titre?: string;
   Langue?: string;
   maisonEdition?: string;
@@ -12,4 +12,5 @@ export class Livre {
   idTypeLivre?: string;
   TypeLivre?: TypeLivre;
   Auteurs?: Auteurs;
+  idAuteurs?:string;
 }

@@ -1,6 +1,6 @@
-import { Auteurs } from "./Auteurs";
-import { TypeLivre } from "./TypeLivre";
-export interface UpdateLivreRequest {
+import { Auteurs } from './Auteurs';
+import { TypeLivre } from './TypeLivre';
+export interface AddLivreReuest{
   id?: string;
   Titre?: string;
   Langue?: string;
@@ -10,7 +10,6 @@ export interface UpdateLivreRequest {
   prixAchat?: number;
   AnneEdition?: number;
   idTypeLivre?: string;
-  idAuteurs?:string;
-  TypeLivre?: TypeLivre;
+  TypeLivre? :TypeLivre;
   Auteurs?: Auteurs;
 }
